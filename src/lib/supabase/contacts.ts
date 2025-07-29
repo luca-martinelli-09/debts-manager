@@ -10,11 +10,6 @@ export type Contact = Tables<'contacts'> & {
 export type ContactInsert = TablesInsert<'contacts'>;
 export type ContactUpdate = TablesUpdate<'contacts'>;
 
-export interface ContactFilters {
-	search?: string;
-	tags?: string[];
-}
-
 export class ContactsService {
 	constructor(private supabase: SupabaseClient<Database>) {}
 
@@ -121,21 +116,6 @@ export class ContactsService {
 		}
 
 		return { data: null, error };
-	}
-
-	async getContactBalance(contactId: string) {
-		const { data, error } = await this.supabase
-			.from('transactions')
-			.select('amount')
-			.eq('contact_id', contactId);
-
-		if (error) {
-			console.error('Error fetching contact balance:', error);
-			return { balance: 0, error };
-		}
-
-		const balance = data.reduce((sum, transaction) => sum + Number(transaction.amount), 0);
-		return { balance, error: null };
 	}
 
 	async removeTagFromContact(contactId: string, tagId: string) {
