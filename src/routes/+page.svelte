@@ -1,11 +1,6 @@
 <script>
 	let { data } = $props();
-	let { colors } = $derived(data);
 </script>
 
-<h1>Welcome to Supabase!</h1>
-<ul>
-	{#each colors as color}
-		<li>{color.name}</li>
-	{/each}
-</ul>
+<h1>Welcome to Debts Manager!</h1>
+<p>Manage your contacts, expenses, and track debts easily.</p>

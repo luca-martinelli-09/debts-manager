@@ -4,7 +4,9 @@
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 
 	import { goto } from '$app/navigation';
+	import { globalStore } from '$lib/state.svelte.js';
 	import Plus from '@tabler/icons-svelte/icons/plus';
+	import { toast } from 'svelte-sonner';
 
 	let { data, children } = $props();
 	let { supabase } = $derived(data);
@@ -17,6 +19,24 @@
 
 		goto('/auth');
 	};
+
+	$effect(() => {
+		if (data.contacts) {
+			globalStore.contacts = data.contacts;
+		}
+
+		if (data.tags) {
+			globalStore.tags = data.tags;
+		}
+
+		if (data.contactsError) {
+			toast.error(data.contactsError.message);
+		}
+
+		if (data.tagsError) {
+			toast.error(data.tagsError.message);
+		}
+	});
 </script>
 
 <Sidebar.Provider
@@ -37,7 +57,7 @@
 		<Sidebar.Inset>
 			<SiteHeader />
 			<div class="flex flex-1 flex-col">
-				<div class="@container/main flex flex-1 flex-col gap-2">
+				<div class="@container/main mx-auto flex w-full max-w-7xl flex-1 flex-col gap-2 px-5">
 					<div class="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
 						{@render children()}
 					</div>

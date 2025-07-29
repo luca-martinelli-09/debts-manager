@@ -2,6 +2,7 @@
 	import * as Avatar from '$lib/components/ui/avatar/index.js';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
+	import { Tag } from '@lucide/svelte';
 	import type { User } from '@supabase/supabase-js';
 	import DeviceLaptop from '@tabler/icons-svelte/icons/device-laptop';
 	import DotsVerticalIcon from '@tabler/icons-svelte/icons/dots-vertical';
@@ -18,14 +19,19 @@
 
 	const sidebarNav = [
 		{
-			title: 'Transazioni',
-			url: '/private/transactions',
+			title: 'Dashboard',
+			url: '/private/dashboard',
 			icon: MoneybagEdit
 		},
 		{
 			title: 'Contatti',
 			url: '/private/contacts',
 			icon: Users
+		},
+		{
+			title: 'Tag',
+			url: '/private/tags',
+			icon: Tag
 		}
 	];
 
